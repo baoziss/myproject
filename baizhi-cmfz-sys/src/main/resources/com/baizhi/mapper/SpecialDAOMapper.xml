@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.SpecialDAO">
+
+    <select id="selectAll" resultType="Special">
+        select id,image,size,title FROM t_special
+    </select>
+
+    <select id="selectById" resultType="Special" parameterType="string">
+        SELECT id,title,image,author,announcer,score,size,content,publish_time publishTime FROM t_special WHERE id=#{id}
+    </select>
+
+    <insert id="insert" parameterType="Special">
+        INSERT INTO t_special VALUES (#{id},#{title},#{image},#{author},#{announcer},#{score},#{size},#{content},#{publishTime})
+    </insert>
+    
+    <delete id="delete" parameterType="string">
+        DELETE FROM t_special WHERE id=#{id}
+    </delete>
+    
+    <update id="update" parameterType="Special">
+        UPDATE t_special SET title=#{title},image=#{image},author=#{author},announcer=#{announcer},score=#{score},size=#{size},content=#{content,jdbcType=VARCHAR},publish_time=#{publishTime}
+        WHERE id=#{id}
+    </update>
+
+
+
+</mapper>

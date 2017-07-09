@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--声明自定义filter-->
+    <bean id="managerFilter" class="com.baizhi.shiro.filter.ManagerFilter"/>
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!--注入安全管理器-->
+        <property name="securityManager" ref="defaultWebSecurityManager"/>
+
+        <!--认证页面-->
+        <property name="loginUrl" value="classpath:/back/main/login.jsp"/>
+
+        <!--配置受限资源列表-->
+        <property name="filterChainDefinitions">
+            <value>
+                /back/main/login.jsp = anon
+                /manager/logout = logout
+                /manager/login = anon
+                /easyui/** = anon
+                /back/main/main.jsp = roles["admin,super"]
+                <!--/test1.jsp = perms["product:findAll"]-->
+                /** = authc
+            </value>
+        </property>
+
+        <!--修改系统默认使用的filter为自定义filter-->
+        <property name="filters">
+            <map>
+                <entry key="roles" value-ref="managerFilter"/>
+            </map>
+        </property>
+    </bean>
+
+
+
+    <!--创建安全管理器-->
+    <bean id="defaultWebSecurityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realms">
+            <list>
+                <ref bean="managerRealm"/>
+            </list>
+        </property>
+    </bean>
+
+    <!--创建自定义realm-->
+    <bean id="managerRealm" class="com.baizhi.shiro.ManagerRealm">
+        <!--注入凭证匹配器-->
+        <property name="credentialsMatcher" ref="hashedCredentialsMatcher"/>
+
+
+    </bean>
+
+    <!--凭证匹配器-->
+    <bean id="hashedCredentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashIterations" value="1024"/>
+        <property name="hashAlgorithmName" value="md5"/>
+    </bean>
+
+
+
+</beans>

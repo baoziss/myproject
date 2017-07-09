@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.RoleDAO">
+
+    <select id="selectByManaId" parameterType="String" resultType="role">
+        select r.id,role,avaliable from t_roles r left join t_mana_roles on r.id=rid
+           where mid=#{manaId}
+    </select>
+
+
+</mapper>

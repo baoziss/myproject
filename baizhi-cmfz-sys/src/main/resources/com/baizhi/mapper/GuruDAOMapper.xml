@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.GuruDAO">
+    <select id="selectById" parameterType="string" resultType="Guru">
+        select id,name,username,status from t_guru WHERE id=#{id}
+    </select>
+
+    <select id="selectAll" resultType="Guru">
+        SELECT id,image,name,status FROM t_guru
+    </select>
+
+    <resultMap id="sel" type="Guru">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="username" property="username"/>
+        <result column="status" property="status"/>
+        <collection property="users" column="id" select="com.baizhi.dao.UserDAO.selectByGuruId" javaType="list" ofType="User"/>
+        <collection property="points" column="id" select="com.baizhi.dao.PointsDAO.selectByGuruId" javaType="list" ofType="Points"/>
+        <collection property="speeches" column="id" select="com.baizhi.dao.SpeechDAO.selectByGuruId" javaType="list" ofType="Speech"/>
+    </resultMap>
+    <select id="selectDetialById" resultMap="sel" parameterType="string">
+        select id,name,username,status from t_guru WHERE id=#{id}
+    </select>
+
+    <update id="update" parameterType="Guru">
+        UPDATE t_guru SET status=#{status} WHERE id=#{id}
+    </update>
+
+    <insert id="insert" parameterType="Guru">
+        insert into t_guru  values (#{id},#{name},#{username},#{pwd},#{status},#{salt})
+    </insert>
+
+
+</mapper>

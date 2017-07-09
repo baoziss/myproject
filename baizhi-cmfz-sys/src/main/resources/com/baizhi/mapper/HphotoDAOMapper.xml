@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.HphotoDAO">
+    <select id="selectAll" resultType="Hphoto">
+        SELECT id,des,url,type FROM t_hphoto
+    </select>
+
+    <select id="selectById" resultType="Hphoto" parameterType="string">
+        SELECT id,des,type,url FROM t_hphoto WHERE id=#{id}
+    </select>
+
+    <update id="update" parameterType="Hphoto">
+        UPDATE t_hphoto SET des=#{des} WHERE id=#{id}
+    </update>
+
+    <insert id="insert" parameterType="Hphoto">
+        INSERT INTO t_hphoto VALUES (#{id},#{des},#{url},#{type})
+    </insert>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM t_hphoto WHERE id=#{id}
+    </delete>
+
+    <update id="updateAll" parameterType="java.util.List">
+        UPDATE t_hphoto SET  type='0' ;
+        <foreach collection="list" item="idd" separator=";" open="" close="">
+            UPDATE t_hphoto SET  type='1' WHERE id=#{idd}
+        </foreach>
+    </update>
+
+</mapper>

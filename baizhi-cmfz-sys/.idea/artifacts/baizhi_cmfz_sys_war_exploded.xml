@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="baizhi-cmfz-sys:war exploded">
+    <output-path>$PROJECT_DIR$/target/baizhi-cmfz-sys</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="baizhi-cmfz-sys" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/baizhi-cmfz-sys/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="baizhi-cmfz-sys/web/Web" />
+    </root>
+  </artifact>
+</component>

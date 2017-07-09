@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/baizhi-cmfz-service/baizhi-cmfz-service.iml" filepath="$PROJECT_DIR$/baizhi-cmfz-service/baizhi-cmfz-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baizhi-cmfz-sys/baizhi-cmfz-sys.iml" filepath="$PROJECT_DIR$/baizhi-cmfz-sys/baizhi-cmfz-sys.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baizhi-commons/baizhi-commons.iml" filepath="$PROJECT_DIR$/baizhi-commons/baizhi-commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baizhi-parent/baizhi-parent.iml" filepath="$PROJECT_DIR$/baizhi-parent/baizhi-parent.iml" />
+    </modules>
+  </component>
+</project>

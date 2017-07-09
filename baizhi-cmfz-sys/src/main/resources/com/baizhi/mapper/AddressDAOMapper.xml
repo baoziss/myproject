@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.AddressDAO">
+
+    <resultMap id="sel" type="Address">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="lev" column="lev"/>
+        <association property="address" column="parent_id" javaType="Address" select="com.baizhi.dao.AddressDAO.selectById"/>
+    </resultMap>
+    <select id="selectByTwoId" parameterType="string" resultMap="sel">
+        select id,name,lev,parent_id from t_address WHERE id=#{id}
+
+    </select><select id="selectById" parameterType="string" resultType="Address">
+        select id,name,lev from t_address WHERE id=#{id}
+    </select>
+</mapper>

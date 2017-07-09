@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.UserDAO">
+    <select id="selectAll"  resultType="User">
+        select id,image,phone,fname,name,sex,status from t_user
+    </select>
+    <select id="selectByGuruId" resultType="User">
+        SELECT id,name FROM t_user WHERE guru_id=#{id}
+    </select>
+
+    <select id="selectByPhone" resultMap="sel">
+        select id,phone,pwd,status,fname,name,sex,salt,sign,address_id,guru_id FROM  t_user WHERE phone=#{phone}
+    </select>
+    
+    <resultMap id="sel" type="User">
+        <id column="id" property="id"/>
+        <result column="phone" property="phone"/>
+        <result column="pwd" property="pwd"/>
+        <result column="fname" property="fname"/>
+        <result column="status" property="status"/>
+        <result column="name" property="name"/>
+        <result column="salt" property="salt"/>
+        <result column="sex" property="sex"/>
+        <result column="sign" property="sign"/>
+        <association property="address" javaType="Address" column="address_id" select="com.baizhi.dao.AddressDAO.selectByTwoId"/>
+        <association property="guru" javaType="Guru" column="guru_id" select="com.baizhi.dao.GuruDAO.selectById"/>
+    </resultMap>
+    <select id="selectById" parameterType="string" resultMap="sel">
+        select id,phone,pwd,status,fname,name,sex,salt,sign,address_id,guru_id FROM  t_user WHERE id=#{id}
+    </select>
+
+    <update id="update" parameterType="string" >
+        UPDATE t_user set status=#{status} WHERE id=#{id}
+    </update>
+</mapper>

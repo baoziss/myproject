@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.SpeechDAO">
+    <select id="selectByGuruId" parameterType="string" resultType="Speech">
+        SELECT id,title FROM t_speech WHERE guru_id=#{id}
+    </select>
+
+    <select id="selectAll" resultType="Speech">
+        select id,author,title,url,publish_time publishTime,status FROM t_speech
+    </select>
+
+    <update id="update" parameterType="Speech">
+        UPDATE t_speech SET status=#{status} WHERE id=#{id}
+    </update>
+
+</mapper>
